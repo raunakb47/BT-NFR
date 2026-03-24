@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="CountPeopleTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="CountPeopleTree">
+        <Sequence>
+            <Action ID="SetBlackboardInt" output_key="result_int" value="0"/>
+            <Repeat num_cycles="4">
+                <Sequence>
+                    <Action ID="SetPerceptionModel" model_type="object"/>
+                    <Delay delay_msec="1000">
+                        <Action ID="Rotate" angle="1.57" speed='0.3' />
+                    </Delay>
+                    <Condition ID="CountPeople" confidence="0.6" cam_frame="head_front_camera_rgb_optical_frame" max_entities="15" gesture="{arm_gesture}" color="{color}" pose="{body_posture}" input_num_person="{result}" num_person="{result}" />
+                </Sequence>
+            </Repeat>
+            <SetBlackboard output_key="result" value="{result_int}"/>
+            <Action ID="Speak" say_text="I have detected " param="{result}" />
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="SetBlackboardInt">
+            <input_port name="value"/>
+            <input_port name="output_key"/>
+        </Action>
+        <Action ID="SetPerceptionModel">
+            <input_port name="model_type"/>
+        </Action>
+        <Action ID="Rotate">
+            <input_port name="angle"/>
+            <input_port name="speed"/>
+        </Action>
+        <Condition ID="CountPeople">
+            <input_port name="confidence"/>
+            <input_port name="cam_frame"/>
+            <input_port name="max_entities"/>
+            <input_port name="gesture"/>
+            <input_port name="color"/>
+            <input_port name="pose"/>
+            <input_port name="input_num_person"/>
+            <output_port name="num_person"/>
+        </Condition>
+        <Action ID="Speak">
+            <input_port name="say_text"/>
+            <input_port name="param"/>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>

@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="FindPersonByNameTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="FindPersonByNameTree">
+        <Sequence>
+            <Action ID="SetPerceptionModel" model_type="object"/>
+            <Action ID="SetHeadJointPosition" vertical="0.0"/>
+            <Action ID="SetTorsoHeight" height="0.12"/>
+            <Action ID="InitProtectedQueue" port="prev_frames"/>
+
+            <!-- Make a Loop -->
+            <Fallback>
+                <RetryUntilSuccessful num_attempts="6"> <!-- 6 attempts at 1.047 rad == 1 turn -->
+                    <Sequence>
+                        <Fallback>
+                            <ForceFailure>
+                                <Action ID="Sleep" time="1.0"/>
+                            </ForceFailure>
+                            <ForceFailure>
+                                <Condition ID="IsDetected" cam_frame="head_front_camera_rgb_optical_frame" confidence="0.7" person_id="{person_id}" interest="person" max_depth="2.0" max_entities="5" order="depth" frames="{new_frames}"/>
+                            </ForceFailure>
+                            <ForceFailure>
+                                <Action ID="FilterPrevDetections" prev_detections="{prev_frames}" new_detections="{new_frames}" margin="1.0" frame_id="map"/>
+                            </ForceFailure>
+                            <ForceFailure>
+                                <Action ID="Rotate" angle="1.047" speed='0.3'/>
+                            </ForceFailure>
+                        </Fallback>
+                    </Sequence>
+                </RetryUntilSuccessful>
+                <Action ID="AlwaysSuccess"/>
+            </Fallback>
+
+            <SetBlackboard value="failure" output_key="success"/>
+
+            <!-- For loop. ConsumeQueue will exit if failure, so when the person is found, it will exit. Therefore, the outer inverter is used -->
+            <Inverter>
+                <Sequence>
+                    <ConsumeQueue queue="{prev_frames}" popped_item="{transform}">
+                        <Sequence>
+                            <Action ID="PublishTF" transform="{transform}" frame_id="{frame}"/>
+                            <Action ID="FilterEntity" frame="{frame}" lambda="0.1"/>
+                            <Action ID="MoveTo" distance_tolerance="0.4" tf_frame="{frame}" is_truncated="true" />
+                            <Action ID="Speak" say_text="Hello, are you " param="{name}" />
+                            <Inverter>
+                                <Sequence>
+                                    <Action ID="DialogConfirmation"/>
+                                    <SetBlackboard value="success" output_key="success"/>
+                                </Sequence>
+                            </Inverter>
+                            <Speak say_text="Oh sorry! You are not the person I am looking for." param="" />
+                        </Sequence>
+                    </ConsumeQueue>
+
+                    <Action ID="Speak" say_text="I couldn't find you, cancelling mission."/>
+                </Sequence>
+            </Inverter>
+
+            <BlackboardCheckString value_A="{success}" value_B="success" return_on_mismatch="FAILURE">
+                <Action ID="Speak" say_text="I found you, " param="{name}"/>
+            </BlackboardCheckString>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Condition ID="IsGesturing">
+            <input_port name="type"/>
+            <input_port name="person_id"/>
+        </Condition>
+        <Condition ID="IsDetected">
+            <input_port name="cam_frame"/>
+            <input_port name="confidence"/>
+            <input_port name="person_id"/>
+            <input_port name="interest"/>
+            <input_port name="max_depth"/>
+            <input_port name="max_entities"/>
+            <input_port name="order"/>
+            <input_port name="best_detection"/>
+            <input_port name="frames"/>
+        </Condition>
+        <Action ID="SetPerceptionModel">
+            <input_port name="model_name"/>
+        </Action>
+        <Action ID="ConvertColor">
+            <input_port name="interest"/>
+            <input_port name="color"/>
+            <input_port name="person_id"/>
+        </Action>
+        <Action ID="Pan">
+            <input_port name="period"/>
+            <input_port name="range"/>
+            <input_port name="pitch_angle"/>
+        </Action>
+        <Action ID="MoveTo">
+            <input_port default="0" name="distance_tolerance"/>
+            <input_port default="entrance" name="tf_frame"/>
+            <input_port default="true" name="will_finish"/>
+            <input_port default="true" name="is_truncated"/>
+        </Action>
+        <Action ID="Speak">
+            <input_port name="say_text"/>
+            <input_port name="param"/>
+        </Action>
+        <Action ID="FilterEntity">
+            <input_port name="frame"/>
+            <input_port name="lambda"/>
+        </Action>
+        <Action ID="FilterPrevDetections">
+            <input_port name="prev_detections"/>
+            <input_port name="new_detections"/>
+            <input_port name="margin"/>
+            <input_port name="frame_id"/>
+        </Action>
+        <Action ID="Rotate">
+            <input_port name="angle"/>
+            <input_port name="speed"/>
+        </Action>
+        <Action ID="DialogConfirmation">
+            <input_port name="question"/>
+            <input_port name="answer"/>
+        </Action>
+        <Action ID="PublishTF">
+            <input_port name="transform"/>
+            <input_port name="frame_id"/>
+        </Action>
+        <Action ID="SetHeadJointPosition">
+            <input_port name="vertical"/>
+        </Action>
+        <Action ID="SetTorsoHeight">
+            <input_port name="height"/>
+        </Action>
+        <Action ID="InitProtectedQueue">
+            <input_port name="port"/>
+        </Action>
+        <Action ID="Sleep">
+            <input_port name="time"/>
+        </Action>
+        <Decorator ID="ConsumeQueue">
+            <input_port name="queue"/>
+            <output_port name="popped_item"/>
+        </Decorator>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>

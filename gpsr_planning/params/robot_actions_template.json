@@ -1,0 +1,244 @@
+[
+    {
+        "name": "count_object",
+        "args": {
+            "search_by": {
+                "type": "string",
+                "choices": [
+                    "specific_item",
+                    "category"
+                ]
+            },
+            "specific_item": {
+                "type": "string",
+                "choices": "<items>"
+            },
+            "category": {
+                "type": "string",
+                "choices": "<categories>"
+            }
+        },
+        "arg_case": "oneOf",
+        "description": "count objects using either a category or a specific item in a waypoint. This action has a result to tell."
+    },
+    {
+        "name": "count_people",
+        "args": {
+            "search_by": {
+                "type": "string",
+                "choices": [
+                    "color",
+                    "arm_gesture",
+                    "body_posture",
+                    "none"
+                ]
+            },
+            "arm_gesture": {
+                "type": "string",
+                "choices": [
+                    "waving",
+                    "raising_left",
+                    "raising_right",
+                    "pointing_left",
+                    "pointing_right"
+                ]
+            },
+            "body_posture": {
+                "type": "string",
+                "choices": [
+                    "sitting",
+                    "standing",
+                    "lying"
+                ]
+            },
+            "color": {
+                "type": "string",
+                "choices": [
+                    "blue",
+                    "yellow",
+                    "black",
+                    "white",
+                    "red",
+                    "orange",
+                    "gray"
+                ]
+            }
+        },
+        "arg_case": "oneOf",
+        "description": "count the number of people in a waypoint using either color or arm gesture or body posture or none of this parameters. This action has a result to tell."
+    },
+    {
+        "name": "find_object",
+        "args": {
+            "size": {
+                "type": "string",
+                "choices": [
+                    "big",
+                    "large",
+                    "small"
+                ]
+            },
+            "weight": {
+                "type": "string",
+                "choices": [
+                    "heavy",
+                    "light",
+                    "thin"
+                ]
+            },
+            "category": {
+                "type": "string",
+                "choices": "<categories>"
+            },
+            "specific_item": {
+                "type": "string",
+                "choices": "<items>"
+            }
+        },
+        "arg_case": "anyOf",
+        "description": "identify, search for, or find an object in a waypoint using either size or weight, or by item name or category. 'category' and 'specific_item' are mutually exclusive, as are 'size' and 'weight.'"
+    },
+    {
+        "name": "pick_object",
+        "args": {},
+        "arg_case": "allOf",
+        "description": "get, fetch, grasp, pick, or take an object previously found in a waypoint. You will need to move after this action."
+    },
+    {
+        "name": "place_object",
+        "args": {
+            "place_location": {
+                "type": "string",
+                "choices": "<waypoints>"
+            }
+        },
+        "arg_case": "allOf",
+        "description": "place, or put an object in a waypoint."
+    },
+    {
+        "name": "offer_object",
+        "args": {},
+        "arg_case": "allOf",
+        "description": "deliver, offer, or bring an object to a person in a waypoint."
+    },
+    {
+        "name": "find_person",
+        "args": {
+            "search_by": {
+                "type": "string",
+                "choices": [
+                    "color",
+                    "arm_gesture",
+                    "body_posture",
+                    "name",
+                    "none"
+                ]
+            },
+            "color": {
+                "type": "string",
+                "choices": [
+                    "blue",
+                    "yellow",
+                    "black",
+                    "white",
+                    "red",
+                    "orange",
+                    "gray"
+                ]
+            },
+            "arm_gesture": {
+                "type": "string",
+                "choices": [
+                    "waving",
+                    "raising_left",
+                    "raising_right",
+                    "pointing_left",
+                    "pointing_right"
+                ]
+            },
+            "body_posture": {
+                "type": "string",
+                "choices": [
+                    "sitting",
+                    "standing",
+                    "lying"
+                ]
+            },
+            "name": {
+                "type": "string",
+                "choices": "<names>"
+            },
+            "previously_found": {
+                "type": "boolean"
+            }
+        },
+        "arg_case": "oneOf",
+        "description": "identify, locate, meet, look for, search for or find one person in a waypoint using either color or arm gesture or name or body posture or without defining any of these parameters. Can find an previously found person."
+    },
+    {
+        "name": "describe_person",
+        "args": {
+            "interest": {
+                "type": "string",
+                "choices": [
+                    "body_posture",
+                    "arm_gesture",
+                    "name"
+                ]
+            }
+        },
+        "arg_case": "allOf",
+        "description": "describe or obtain the body posture or name or the arm gesture of a person in a waypoint. This action has a result to tell."
+    },
+    {
+        "name": "follow_person",
+        "args": {
+            "destination_waypoint": {
+                "type": "string",
+                "choices": "<waypoints>"
+            }
+        },
+        "arg_case": "allOf",
+        "description": "walk behind a person from a waypoint to another waypoint."
+    },
+    {
+        "name": "guide_person",
+        "args": {
+            "destination_waypoint": {
+                "type": "string",
+                "choices": "<waypoints>"
+            }
+        },
+        "arg_case": "allOf",
+        "description": "take, escort, lead, or guide a person from your location to a destination waypoint. Waypoints can be forniture or rooms."
+    },
+    {
+        "name": "answer_quiz",
+        "args": {},
+        "arg_case": "allOf",
+        "description": "answer a quiz to a person in a waypoint."
+    },
+    {
+        "name": "speak",
+        "args": {
+            "say_text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 150
+            }
+        },
+        "arg_case": "allOf",
+        "description": "speak or tell something in a waypoint. To speak to a person, you need to find it first. You can refer to the result of a previous action using '<result>' or speaking a fact like datetime, day of the week, team affiliation, nationality, or your name."
+    },
+    {
+        "name": "move_to",
+        "args": {
+            "destination_waypoint": {
+                "type": "string",
+                "choices": "<waypoints>"
+            }
+        },
+        "arg_case": "allOf",
+        "description": "move from a waypoint to another waypoint. Don't use it if you are already in the waypoint."
+    }
+]

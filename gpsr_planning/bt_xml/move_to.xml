@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="MoveToTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="MoveToTree">
+        <Sequence>
+            <Action ID="MoveTo" distance_tolerance="0" tf_frame="{destination_waypoint}"/>
+            <Action ID="Speak" say_text="I have reached " param="{destination_waypoint}"/>
+            <SetBlackboard output_key="current_position" value="{destination_waypoint}" />
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="MoveTo">
+            <input_port default="0" name="distance_tolerance"/>
+            <input_port default="entrance" name="tf_frame"/>
+            <input_port default="true" name="will_finish"/>
+            <input_port default="true" name="is_truncated"/>
+        </Action>
+        <Action ID="Speak">
+            <input_port name="say_text"/>
+            <input_port name="param"/>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>

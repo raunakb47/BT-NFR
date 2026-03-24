@@ -1,0 +1,127 @@
+{
+  "profiles": [
+    {
+      "name": "count_object",
+      "Constraints": [
+        "Move to the object's expected location if not already there",
+        "high accuracy object recognition (>95%)",
+        "RGB-D camera handles color/size variations",
+        "counts without occlusion; single camera FOV limit",
+        "YCB objects only; standard indoor lighting"
+      ]
+    },
+    {
+      "name": "count_people",
+      "Constraints": [
+        "Move to the expected location if not already there",
+        "reliable people counting (>90%)",
+        "Laser/RGB-D for detection <5m",
+        "head pan-tilt for scan; no full rotation without turn",
+        "good lighting"
+      ]
+    },
+    {
+      "name": "find_object",
+      "Constraints": [
+        "Move to the object's expected location if not already there",
+        "precise property ID with low false positives",
+        "RGB-D for depth/measurement; pretrained models",
+        "resolution limit (640x480); precede grasp",
+        "known YCB items; no occlusions"
+      ]
+    },
+    {
+      "name": "pick_object",
+      "Constraints": [
+        "secure grasp without damage (>95% confidence)",
+        "gripper force/width adjust (10cm, 1.5kg dynamic)",
+        "7 DoF arm; single-arm only; reach ~0.8m",
+        "object in limits; stable surface; no dynamics"
+      ]
+    },
+    {
+      "name": "place_object",
+      "Constraints": [
+        "stable placement without drop/collision",
+        "laser nav to waypoint; gentle release <3kg",
+        "single arm; torso height adjust (1.1-1.45m)",
+        "reachable waypoints; time-efficient; table heights"
+      ]
+    },
+    {
+      "name": "offer_object",
+      "Constraints": [
+        "safe handover with no contact approach",
+        "stable hold; depth for 10-20cm distance",
+        "single arm; audio cues; base positioning",
+        "reachable person; height adjust"
+      ]
+    },
+    {
+      "name": "find_person",
+      "Constraints": [
+        "Move to the person's expected location if not already there",
+        "reliable person detection at waypoint",
+        "laser/RGB-D for detection <5m; pan-tilt scan",
+        "turn for full rotation; robust to occlusions",
+        "defined features; good lighting; range 0.5-5m"
+      ]
+    },
+    {
+      "name": "describe_person",
+      "Constraints": [
+        "accurate attribute description",
+        "vision for pose/gesture; speech for name",
+        "front mic; position for clear view",
+        "acceptable light/noise; cooperative person"
+      ]
+    },
+    {
+      "name": "follow_person",
+      "Constraints": [
+        "Move to the person's expected location if not already there",
+        "continuous track with safe distance",
+        "laser/RGB-D tracking; speed match 0.5-1m/s",
+        "differential drive; reacquire if lost",
+        "in view; clear path; no standstill >30s"
+      ]
+    },
+    {
+      "name": "guide_person",
+      "Constraints": [
+        "tell the person politely to follow",
+        "short path; suitable pace",
+        "SLAM planning; speed max 1m/s; checks",
+        "voice cues; indoor flat surfaces",
+        "known waypoints; person follows"
+      ]
+    },
+    {
+      "name": "answer_quiz",
+      "Constraints": [
+        "correct/timely response",
+        "clear synthesis; delay <2s",
+        "voice/head only; onboard compute",
+        "low noise; GPSR scope; distance <3m"
+      ]
+    },
+    {
+      "name": "speak",
+      "Constraints": [
+        "speech in complete sentence",
+        "directed volume; front speakers/head orient",
+        "voice-only if arm busy",
+        "audible noise levels; distance 1-5m"
+      ]
+    },
+    {
+      "name": "move_to",
+      "Constraints": [
+        "accurate navigation with avoidance",
+        "SLAM/laser; speed <2m/s; differential drive",
+        "battery >1hr; safety buffers",
+        "predefined map; no standstill >30s; flat floor"
+      ]
+    }
+  ]
+}
