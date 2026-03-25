@@ -45,7 +45,7 @@ NFR integration helps ensure the generated plans respect robot capabilities, ope
 ## Dependencies
 - ROS 2 Jazzy
 - llama_ros package
-- Qwen3-8B Q8 GGUF model (can be changed as needed; may require updating llama.cpp for updated architecture support)
+- Qwen3-8B Q8 GGUF model (can be changed as needed; may require updating llama.cpp for newer architecture support)
 - langchain-core
 
 ## Installation
