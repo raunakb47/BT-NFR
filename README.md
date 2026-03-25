@@ -50,13 +50,13 @@ NFR integration is a key feature of this planner, helping ensure the generated p
 
 ## Installation
 
-1. Install ROS 2 Jazzy (preferably in linux environment): [https://docs.ros.org/en/humble/Installation.html](https://docs.ros.org/en/jazzy/Installation.html)
+1. [Install](https://docs.ros.org/en/jazzy/Installation.html) ROS 2 Jazzy (preferably in linux environment)
 
 2. [Create](https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html) a ROS 2 workspace
 
 3. [Setup](https://docs.python.org/3/library/venv.html) python 3 virtual environment to install dependencies
 
-4. [Install]((https://github.com/mgonzs13/llama_ros)) `llama_ros`
+4. [Install](https://github.com/mgonzs13/llama_ros) `llama_ros`
 
 5. Clone the repository and build
 
