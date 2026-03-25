@@ -32,7 +32,7 @@ NFR integration is a key feature of this planner, helping ensure the generated p
 
 ## Key Design Principles
 
-- **Monolithic Prompt**: Single prompt for better stability and maintainability
+- **Monolithic Prompt**: Single prompt for better stability
 - **NFR as Active Guidance**: Relevant NFRs are considered to meaningfully improve the plan
 - **Functional Consistency**: Core actions and parameters remain stable and aligned with the original implementation
 - **Safety**: Automatic fallback to base plan if refinement produces invalid output
