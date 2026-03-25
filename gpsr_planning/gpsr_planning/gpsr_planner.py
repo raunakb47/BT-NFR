@@ -42,26 +42,31 @@ class GpsrPlanner:
         nfr_profiles_path: str = "src/GPSR_planning/gpsr_planning/params/nfr_profiles.json"
     ) -> None:
 
+         # Load robot action definitions (from robot_actions.json)
         self.robot_actions = json.load(open(robot_actions_path))
         self.waypoints_path = waypoints_path
 
+        # Build grammar schema for structured JSON output
         self.create_grammar()
 
-        # Load NFR profiles (single "Constraints" list)
+        # Load NFR profiles (single "Constraints" list per action)
         self.nfr_profiles = json.load(open(nfr_profiles_path))["profiles"]
 
         self.llm = ChatLlamaROS(
-            temp=0.60,
+            temp=0.3,                              # Set to low for determinism
             grammar_schema=self.grammar_schema
         )
 
         is_lora_added = False
 
+        # Build list of available actions for the prompt
         self.actions_descriptions = ""
         for robot_act in self.robot_actions:
             self.actions_descriptions += f"- {robot_act['name']}: {robot_act['description']}\n"
 
+        # ==================================================================
         # Monolithic prompt with clear NFR usage instruction
+        # ==================================================================
         monolithic_prompt_template = ChatPromptTemplate.from_messages([
             SystemMessagePromptTemplate.from_template(
                 "You are a robot named Tiago participating in the Robocup with the Gentlebots team from Spain, "
@@ -99,17 +104,22 @@ class GpsrPlanner:
             )
         ])
 
+        # Create the final chain: prompt → LLM → string output
         self.chain = monolithic_prompt_template | self.llm | StrOutputParser()
 
+    # Cancel any ongoing LLM generation
     def cancel(self) -> None:
-        self.llm.cancel()
+        self.llm.cancel()           
 
+    # Primary entry point: Send a natural language command and get back a plan
     def send_prompt(self, prompt: str) -> Tuple[dict | str]:
-
+        
+        # Pre-process the user prompt
         prompt = prompt + " "
         prompt = re.sub(r'\b(?:tell|say)\s+me\b', lambda match: match.group(0).replace("me", "at the instruction point"), prompt, flags=re.IGNORECASE)
         prompt = prompt.replace("to to", "to").replace("them", "him").strip()
 
+        #  # Add current date/time context
         today_dt = dt.datetime.now()
         day_suffix = lambda day: 'th' if 11 <= day <= 13 else {1: 'st', 2: 'nd', 3: 'rd'}.get(day % 10, 'th')
         day = today_dt.strftime(f"%A {today_dt.day}{day_suffix(today_dt.day)}")
@@ -117,12 +127,13 @@ class GpsrPlanner:
         time_h = today_dt.strftime("%H:%M")
         tomorrow = (today_dt + dt.timedelta(days=1)).strftime("%A")
 
-        # Build full NFR summary (SLM is instructed to filter it internally)
+        # Build full NFR summary (SLM will filter internally based on chosen actions)
         nfr_full_summary = ""
         for profile in self.nfr_profiles:
             constraints = "; ".join(profile.get('Constraints', []))
             nfr_full_summary += f"- {profile['name']}: {constraints}\n"
 
+        # Send to SLM using the single monolithic prompt
         response = self.chain.invoke({
             "prompt": prompt,
             "actions_descriptions": self.actions_descriptions[:-1],
@@ -134,6 +145,7 @@ class GpsrPlanner:
 
         print("LLM Response:", response)
 
+        # Parse JSON output with fallback
         try:
             plan = json.loads(response)
             return plan, prompt
@@ -142,6 +154,7 @@ class GpsrPlanner:
             print("Raw response was:", response[:500] + "..." if len(response) > 500 else response)
             return {"actions": []}, prompt
 
+    # Build grammar schema to enforce structured JSON output from the SLM
     def create_grammar(self) -> None:
         self.actions_descriptions = ""
         actions_refs = []
