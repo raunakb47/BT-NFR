@@ -2,9 +2,9 @@
 
 ## Installation
 
-1. [Install](https://docs.ros.org/en/humble/Installation.html) ROS 2 Humble (preferably in linux environment).
+1. Install ROS 2 Jazzy (preferably in linux environment): [https://docs.ros.org/en/humble/Installation.html](https://docs.ros.org/en/jazzy/Installation.html)
 
-2. Create a ROS 2 workspace
+2. [Create](https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html) a ROS 2 workspace
 
 3. Clone the repository and build
 
