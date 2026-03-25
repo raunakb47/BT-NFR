@@ -1,4 +1,4 @@
-# GPSR Behviour Tree Generation with SLM
+# SLM-Assisted NFR Adherence in Behavior Trees for Domestic Robots
 
 This ROS 2 package provides a planning node for the General Purpose Service Robot (GPSR) task category in RoboCup@Home and builds upon [https://github.com/igonzf/GPSR_planning](https://github.com/igonzf/GPSR_planning)
 
