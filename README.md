@@ -28,7 +28,7 @@ It converts natural language commands into structured behavior tree action seque
 5. Add safety checks or verification steps when appropriate
 6. Returns a structured JSON plan that is converted into a Behavior Tree
 
-NFR integration is a key feature of this planner, helping ensure the generated plans respect robot capabilities, operational constraints, and quality attributes defined for RoboCup@Home.
+NFR integration helps ensure the generated plans respect robot capabilities, operational constraints, and quality attributes defined for RoboCup@Home.
 
 ## Key Design Principles
 
