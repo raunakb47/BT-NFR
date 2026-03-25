@@ -40,7 +40,7 @@ NFR integration is a key feature of this planner, helping ensure the generated p
 ## Configuration
 - **Model temperature**: 0.3
 - Grammar enforcement ensures valid JSON output
-- NFR profiles can be easily extended or modified in 'nfr_profiles.json'
+- NFR profiles can be easily extended or modified in `nfr_profiles.json`
 
 ## Dependencies
 - ROS 2 Jazzy
@@ -56,7 +56,7 @@ NFR integration is a key feature of this planner, helping ensure the generated p
 
 3. [Setup](https://docs.python.org/3/library/venv.html) python 3 virtual environment to install dependencies
 
-4. [Install]((https://github.com/mgonzs13/llama_ros)) 'llama_ros'
+4. [Install]((https://github.com/mgonzs13/llama_ros)) `llama_ros`
 
 5. Clone the repository and build
 
