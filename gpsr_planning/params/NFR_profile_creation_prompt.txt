@@ -1,0 +1,54 @@
+You are an expert in requirements engineering for domestic service robots.
+
+Your task is to automatically derive a complete set of Non-Functional Requirements (NFR) profiles for a given list of robot actions.
+
+=== INPUTS ===
+- List of available robot actions
+- Robot description: A domestic service robot with one or more manipulator arms, gripper(s), RGB-D or similar vision sensors, base mobility (differential or omnidirectional drive), and onboard computation.
+- Operating environment: As to be specified in input. A indoor domestic setting with rooms, furniture, tables, everyday objects, natural or typical indoor lighting, and occasional human interaction.
+
+=== OUTPUT FORMAT ===
+Return ONLY a valid JSON object with this exact structure:
+{
+  "profiles": [
+    {
+      "name": "<exact_action_name>",
+      "Constraints": [
+        "constraint 1",
+        "constraint 2",
+        ...
+      ]
+    },
+    ...
+  ]
+}
+
+CHAIN-OF-THOUGHT PROCESS (follow strictly)
+
+1. For each action, understand its purpose and what functional + non-functional demands it places on a domestic service robot in the given environment.
+
+2. Derive relevant Non-Functional Requirements by considering:
+   - Quality attributes (accuracy, reliability, safety, efficiency, robustness)
+   - Robot hardware limitations (arm reach, gripper payload/force, vision range/resolution, mobility constraints)
+   - Typical domestic operating conditions (indoor lighting, clutter, time constraints, human presence, safety)
+
+3. Merge all derived constraints into a single concise "Constraints" list per action.
+
+4. Explicit strategy for resolving overlapping or conflicting NFRs:
+   - Merge overlapping ideas into the single most specific, actionable, and measurable statement.
+   - If constraints conflict, prioritize safety, reliability, and real-world feasibility in a home setting over performance or convenience.
+   - Prefer constraints that can be verified or enforced using the robot’s typical sensors (vision, force/torque, odometry) and actuators.
+   - Remove purely redundant or overly generic statements.
+   - Keep constraints practical for everyday domestic operation.
+
+5. Make each constraint short and direct related to action execution.
+
+6. Ensure the final list is focused on action quality for successful domestic robot performance.
+
+Now derive the complete NFR profiles using only the inputs below.
+
+<Action list>
+<Robot specification>
+<environment specification>
+
+Output ONLY the final JSON object. Do not add any extra text.
