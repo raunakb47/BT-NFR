@@ -37,9 +37,8 @@ CHAIN-OF-THOUGHT PROCESS (follow strictly)
 4. Explicit strategy for resolving overlapping or conflicting NFRs:
    - Merge overlapping ideas into the single most specific, actionable, and measurable statement.
    - If constraints conflict, prioritize safety, reliability, and real-world feasibility in a home setting over performance or convenience.
-   - Prefer constraints that can be verified or enforced using the robot’s typical sensors (vision, force/torque, odometry) and actuators.
-   - Remove purely redundant or overly generic statements.
-   - Keep constraints practical for everyday domestic operation.
+   - Prefer constraints that can be verified or enforced using the specified robot’s sensors (vision, force/torque, odometry) and actuators.
+   - Keep constraints practical for specified domestic operation.
 
 5. Make each constraint short and direct related to action execution.
 
