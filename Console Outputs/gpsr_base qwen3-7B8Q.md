@@ -1,6 +1,6 @@
 ## Command: Tell me how many persons pointing to the left are in the kitchen
 
-#### LLM Console
+#### SLM Console
 
 [llama_node-1] [INFO] [llama.cpp:generate_response:675] Sampler params: 	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
 [llama_node-1] 	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = -1
@@ -109,7 +109,7 @@
 
 ## Command: Follow the standing person in the kitchen
 
-#### LLM Console
+#### SLM Console
 
 [llama_node-1] [INFO] [llama.cpp:generate_response:675] Sampler params: 	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
 [llama_node-1] 	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = -1
@@ -198,7 +198,7 @@
 
 ## Command: Follow Emma from the kitchen to the bedroom
 
-#### LLM Console
+#### SLM Console
 
 [llama_node-1] [INFO] [llama.cpp:generate_response:675] Sampler params: 	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
 [llama_node-1] 	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = -1

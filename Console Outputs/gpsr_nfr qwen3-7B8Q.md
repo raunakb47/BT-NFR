@@ -1,6 +1,6 @@
 ## Command: Tell me how many persons pointing to the left are in the kitchen
 
-#### LLM Console
+#### SLM Console
 [llama_node-1] [INFO] [llama.cpp:generate_response:675] Sampler params: 	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
 [llama_node-1] 	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = -1
 [llama_node-1] 	top_k = 40, top_p = 0.950, min_p = 0.050, xtc_probability = 0.000, xtc_threshold = 0.100, typical_p = 1.000, top_n_sigma = -1.000, temp = 0.200
@@ -134,7 +134,7 @@ Refined Response: {"actions": [{"explanation_of_next_actions": "First, I need to
 
 ## Command: Follow the standing person in the kitchen
 
-#### LLM Console
+#### SLM Console
 
 [llama_node-1] [INFO] [llama.cpp:generate_response:675] Sampler params: 	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
 [llama_node-1] 	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = -1
@@ -251,7 +251,7 @@ Refined Response: {"actions": [{"explanation_of_next_actions": "First, I need to
 
 ## Command: Follow Emma from the kitchen to the living room
 
-#### LLM Console
+#### SLM Console
 
 [llama_node-1] [INFO] [llama.cpp:generate_response:675] Sampler params: 	repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
 [llama_node-1] 	dry_multiplier = 0.000, dry_base = 1.750, dry_allowed_length = 2, dry_penalty_last_n = -1
